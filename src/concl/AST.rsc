@@ -6,13 +6,16 @@ module concl::AST
  * - make sure there is an almost one-to-one correspondence with the grammar in Syntax.rsc
  */
 
+// Console pack, the root of AST
 data ConsolePack(loc src=|unknown:///|)
 	= console_pack(str name, list[Component] components);
+// A component of the console pack
 data Component(loc src=|unknown:///|)
 	= component(Console cons)
 	| component(Controller ctrl)
 	| component(Game game);
 
+// Console and its subcomponents
 data Console(loc src=|unknown:///|) = console(Storage storage, Display display);
 data Storage(loc src=|unknown:///|) = storage(int size);
 data Display(loc src=|unknown:///|)
@@ -26,6 +29,7 @@ data Resolution(loc src=|unknown:///|)
 	| res_4k()
 	| res_5k();
 
+// Controller and its colour subcomponent
 data Controller(loc src=|unknown:///|) = controller(Colour colour);
 data Colour(loc src=|unknown:///|)
 	= black()
@@ -36,6 +40,7 @@ data Colour(loc src=|unknown:///|)
 	| silver()
 	| green();
 
+// Game component with an option of "No game"
 data Game(loc src=|unknown:///|)
 	= gameHedwig()
 	| gameLink()

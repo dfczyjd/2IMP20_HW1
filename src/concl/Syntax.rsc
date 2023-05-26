@@ -23,8 +23,7 @@ syntax Display = "display" "{"
 	| (Resolution "," DisplayType "," Diagonal)
 	| (Resolution "," Diagonal "," DisplayType)
 	) "}";
-syntax DisplayItem = Diagonal | DisplayType | Resolution;
-syntax Diagonal = "diagonal" ":" Float "inch";
+syntax Diagonal = "diagonal" ":" Real "inch";
 syntax DisplayType = "type" ":" (TypeLED | TypeOLED);
 syntax Resolution = "resolution" ":" (ResHD | ResFullHD | Res4K | Res5K);
 
@@ -37,7 +36,7 @@ syntax GameName = "name" ":" (GameLink | GameHedwig);
 // Lexicals
 lexical Name = [A-Za-z_][A-Za-z0-9_]*;
 lexical Natural = "0" | [1-9][0-9]*;
-lexical Float = Natural ("."[0-9]*[1-9])?;
+lexical Real = Natural ("."[0-9]*[1-9])?;
 
 lexical TypeLED = "LED";
 lexical TypeOLED = "OLED";
@@ -54,6 +53,7 @@ lexical Colour = Black
 	| Silver
 	| Green;
 
+// "Keyword" lexicals, left as lexicals for pattern matching
 lexical Black = "black";
 lexical White = "white";
 lexical Red = "red";
