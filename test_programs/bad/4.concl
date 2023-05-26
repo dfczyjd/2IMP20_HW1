@@ -1,0 +1,18 @@
+console_pack my_console_pack {
+	console {
+		display {
+			diagonal: 30 inch,
+			type: LED,
+			resolution: Full-HD
+		}
+	},
+	controller {
+		colour: blue
+	},
+	controller {
+		colour: black
+	},
+	game {
+		name: Hedwig the Hedgehog
+	}
+}

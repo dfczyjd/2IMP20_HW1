@@ -1,0 +1,13 @@
+console_pack my_console_pack {
+	console {
+		storage: 1024 GB,
+		display {
+			diagonal: 30 inch,
+			type: LED,
+			resolution: Full-HD
+		}
+	},
+	game {
+		name: Hedwig the Hedgehog
+	}
+}

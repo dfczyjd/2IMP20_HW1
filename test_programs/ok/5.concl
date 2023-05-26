@@ -1,0 +1,19 @@
+console_pack my_console_pack {
+	console {
+		storage: 1024 GB,
+		display {
+			diagonal: 0 inch,
+			type: LED,
+			resolution: Full-HD
+		}
+	},
+	controller {
+		colour: blue
+	},
+	controller {
+		colour: black
+	},
+	game {
+		name: Hedwig the Hedgehog
+	}
+}

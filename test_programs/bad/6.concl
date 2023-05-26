@@ -1,0 +1,14 @@
+console_pack my_console_pack {
+	console {
+		storage: 1024 GB,
+	},
+	controller {
+		colour: blue
+	},
+	controller {
+		colour: black
+	},
+	game {
+		name: Hedwig the Hedgehog
+	}
+}
