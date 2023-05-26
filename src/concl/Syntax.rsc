@@ -4,40 +4,40 @@ module concl::Syntax
  * Define a concrete syntax for ConCL. The langauge's specification is available in the PDF (Section 3)
  */
 
-/*
-start syntax Pack = "console_pack" Name;
-lexical Name = [A-Za-z]*;
-
-layout Whitespace = [\ \t\n\r]*;// !>> [\ \t\n\r];
-*/
-start syntax Pack = "console_pack" Name "{" Component ComponentTail "}";
-syntax ComponentTail = ComponentTailItem*;
-syntax ComponentTailItem = "," Component;
+start syntax Pack = "console_pack" Name "{" Components "}";
+syntax Components = Component ("," Component)*;
 syntax Component = Console
 	| Controller
 	| Game;
 
 syntax Console = "console" "{"
-	(Storage "," Display) | (Display "," Storage)
+	((Storage "," Display) | (Display "," Storage))
 	"}";
-//syntax ConsoleItem = Storage | Display;
-syntax Storage = "storage:" Number "GB";
+syntax Storage = "storage" ":" Natural "GB";
 
-syntax Display = "display" "{" DisplayItem "," DisplayItem "," DisplayItem "}";
+syntax Display = "display" "{"
+	( (Diagonal "," DisplayType "," Resolution)
+	| (Diagonal "," Resolution "," DisplayType)
+	| (DisplayType "," Diagonal "," Resolution)
+	| (DisplayType "," Resolution "," Diagonal)
+	| (Resolution "," DisplayType "," Diagonal)
+	| (Resolution "," Diagonal "," DisplayType)
+	) "}";
 syntax DisplayItem = Diagonal | DisplayType | Resolution;
-syntax Diagonal = "diagonal:" Number "inch";
-syntax DisplayType = "type:" (TypeLED | TypeOLED);
-syntax Resolution = "resolution:" (ResHD | ResFullHD | Res4K | Res5K);
+syntax Diagonal = "diagonal" ":" Float "inch";
+syntax DisplayType = "type" ":" (TypeLED | TypeOLED);
+syntax Resolution = "resolution" ":" (ResHD | ResFullHD | Res4K | Res5K);
 
 syntax Controller = "controller" "{" ControllerColour "}";
-syntax ControllerColour = "colour:" Colour;
+syntax ControllerColour = "colour" ":" Colour;
 
-syntax Game = "game" "{" GameName "}";
-syntax GameName = "name:" (GameLink | GameHedwig);
+syntax Game = "game" "{" GameName? "}";
+syntax GameName = "name" ":" (GameLink | GameHedwig);
 
 // Lexicals
 lexical Name = [A-Za-z_][A-Za-z0-9_]*;
-lexical Number = [1-9][0-9]*("."[0-9]*[1-9])?;
+lexical Natural = "0" | [1-9][0-9]*;
+lexical Float = Natural ("."[0-9]*[1-9])?;
 
 lexical TypeLED = "LED";
 lexical TypeOLED = "OLED";
@@ -46,21 +46,24 @@ lexical ResFullHD = "Full-HD";
 lexical Res4K = "4K";
 lexical Res5K = "5K";
 
-lexical Colour = "black"
-	| "white"
-	| "red"
-	| "blue"
-	| "gold"
-	| "silver"
-	| "green";
+lexical Colour = Black
+	| White
+	| Red
+	| Blue
+	| Gold
+	| Silver
+	| Green;
+
+lexical Black = "black";
+lexical White = "white";
+lexical Red = "red";
+lexical Blue = "blue";
+lexical Gold = "gold";
+lexical Silver = "silver";
+lexical Green = "green";
 
 lexical GameHedwig = "Hedwig the Hedgehog";
 lexical GameLink = "Link\'s Resolution";
 
 
 layout Whitespace = [\ \t\n\r]* !>> [\ \t\n\r];
-
-//start syntax Pack = "console_pack" Name "{" (Component*) "}";
-//syntax Component = Console
-
-//exical Name = [A-Za-z_][A-Za-z0-9_]*

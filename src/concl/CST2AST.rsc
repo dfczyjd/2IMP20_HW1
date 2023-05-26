@@ -14,71 +14,35 @@ import concl::Parser;
  * Map lexical nodes to Rascal primitive types (bool, int, str)
  */
 
-AST_Game parse_game((Component)`game { name: <GameHedwig _> }`) = gameHedwig();
-AST_Game parse_game((Component)`game { name: <GameLink _> }`) = gameLink();
+Colour mapColour((Colour)`<Black _>`) = black();
+Colour mapColour((Colour)`<White _>`) = white();
+Colour mapColour((Colour)`<Red _>`) = red();
+Colour mapColour((Colour)`<Blue _>`) = blue();
+Colour mapColour((Colour)`<Gold _>`) = gold();
+Colour mapColour((Colour)`<Silver _>`) = silver();
+Colour mapColour((Colour)`<Green _>`) = green();
 
-/*list[Component] get_components((ComponentTailItem*)``)
-{
-	println("Empty");
-	return [];
-}
+//Display mapDisplay();
 
-list[Component] get_components((ComponentTailItem*)`, <Component head> <ComponentTail tail>`)
-{
-	println("Just head");
-	println(head);
-	return [head];
-}*/
+//Storage mapStorage((Storage)`storage: {<Natural 
 
-list[Component] get_components(ComponentTail items)
+Component mapComponent((Component)`game { name: <GameHedwig _> }`)= component(gameHedwig());
+Component mapComponent((Component)`game { name: <GameLink _> }`) = component(gameLink());
+
+Component mapComponent((Component)`controller { colour: <Colour colour> }`)
+	= component(controller(mapColour(colour)));
+
+Component mapComponent((Component)`<Console cons>`) = component(console(storage(5), display(0.0, led(), res_hd())));
+
+ConsolePack cst2ast((Pack)`console_pack <Name name> { <Components comps> }`)
 {
-	//println(length(items));
-	/*switch (items)
+	list[Component] components = [];
+	visit (comps)
 	{
-		case (ComponentTail)`<ComponentTail _>, <Component _>`: println("Yes");
-		default: println("No");
+		case (Component)`<Component comp>`:
+			components += [mapComponent(comp)];
 	}
-	list[Component] res = [];
-	for (/Component cmp <- items.args)
-		res = res + [cmp];
-	return res;*/
-	list[Component] res = [];
-	visit (items)
-	{
-		case (Component)`<Component comp>`: res = res + [comp];
-	}
-	return res;
-}
-
-/*list[Component] get_components(Component* comps)
-{
-	println(comps);
-	switch (comps)
-	{
-		case (Component*)``:
-		{
-			println("Empty");
-			return [];
-		}
-		case (Component*)`<Component head>`:
-		{
-			println("Just head");
-			return [head];
-		}
-		case (Component*)`<Component head> <Component* tail>`:
-		{
-			println("Head and tail");
-			return [head] + get_components(tail);
-		}
-	}
-	return [];
-}*/
-
-AST_ConsolePack cst2ast((Pack)`console_pack <Name _> { <Component head> <ComponentTail tail> }`)
-{
-	list[Component] comps = [head] + get_components(tail);
-	println(size(comps));
-	return console_pack(gameHedwig());
+	return console_pack("<name>", components);
 }
 
 test bool main()

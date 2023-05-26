@@ -6,12 +6,28 @@ module concl::AST
  * - make sure there is an almost one-to-one correspondence with the grammar in Syntax.rsc
  */
 
-alias ConsoleName = str;
+data ConsolePack(loc src=|unknown:///|)
+	= console_pack(str name, list[Component] components);
+data Component(loc src=|unknown:///|)
+	= component(Console cons)
+	| component(Controller ctrl)
+	| component(Game game);
 
-data AST_ConsolePack(loc src=|unknown:///|) = console_pack(AST_Game game);
+data Console(loc src=|unknown:///|) = console(Storage storage, Display display);
+data Storage(loc src=|unknown:///|) = storage(int size);
+data Display(loc src=|unknown:///|)
+	= display(real diagonal, DisplayType displayType, Resolution res);
+data DisplayType(loc src=|unknown:///|)
+	= led()
+	| oled();
+data Resolution(loc src=|unknown:///|)
+	= res_hd()
+	| res_fullhd()
+	| res_4k()
+	| res_5k();
 
-data AST_Controller(loc src=|unknown:///|) = controller(AST_Colour colour);
-data AST_Colour(loc src=|unknown:///|)
+data Controller(loc src=|unknown:///|) = controller(Colour colour);
+data Colour(loc src=|unknown:///|)
 	= black()
 	| white()
 	| red()
@@ -20,6 +36,7 @@ data AST_Colour(loc src=|unknown:///|)
 	| silver()
 	| green();
 
-data AST_Game(loc src=|unknown:///|)
+data Game(loc src=|unknown:///|)
 	= gameHedwig()
-	| gameLink();
+	| gameLink()
+	| gameNone();
