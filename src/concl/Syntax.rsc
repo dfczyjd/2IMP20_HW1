@@ -30,7 +30,7 @@ syntax Resolution = "resolution" ":" (ResHD | ResFullHD | Res4K | Res5K);
 syntax Controller = "controller" "{" ControllerColour "}";
 syntax ControllerColour = "colour" ":" Colour;
 
-syntax Game = "game" "{" GameName? "}";
+syntax Game = "game" "{" GameName "}";
 syntax GameName = "name" ":" (GameLink | GameHedwig);
 
 // Lexicals

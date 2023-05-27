@@ -2,11 +2,7 @@ module concl::CST2AST
 
 import concl::AST;
 import concl::Syntax;
-import List;
 import String;
-
-import IO;	// TODO: remove after testing
-import concl::Parser;
 
 /*
  * Implement a mapping from concrete syntax trees (CSTs) to abstract syntax trees (ASTs)
@@ -78,11 +74,4 @@ ConsolePack cst2ast((Pack)`console_pack <Name name> { <Components comps> }`)
 			components += mapComponent(comp);
 	}
 	return console_pack("<name>", components);
-}
-
-test bool main()
-{
-	Pack pack = parserConCL(|file:///D:/LatinName/test.concl|);
-	println(cst2ast(pack));
-	return true;
 }
