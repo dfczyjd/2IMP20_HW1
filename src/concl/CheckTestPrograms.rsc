@@ -9,14 +9,21 @@ void main() {
 	for(int n <- [1 .. 7+1]) {
 		concl_file = iprintToString(n) + ".concl";
 		print(concl_file + ": ");
-		bool ok = checkWellformedness(ok_tests_loc + concl_file);
-		if(ok) {
-			print("WELLFORMED");
+		bool ok;
+		try
+			ok = checkWellformedness(ok_tests_loc + concl_file);
+		catch ParseError : {
+			ok = false;
+			print("ParseError ");
 		}
-		else {
-			print("MALFORMED");
+		finally {
+			if(ok) {
+				println("WELLFORMED");
+			}
+			else {
+				println("MALFORMED");
+			}
 		}
-		println();
 	}
 	
 	println();
@@ -26,19 +33,20 @@ void main() {
 	for(int n <- [1 .. 16+1]) {
 		concl_file = iprintToString(n) + ".concl";
 		print(concl_file + ": ");
-		bool ok = false;
+		bool ok;
 		try
 			ok = checkWellformedness(bad_tests_loc + concl_file);
-		catch ParseError :
+		catch ParseError : {
+			ok = false;
 			print("ParseError ");
+		}
 		finally {
 			if(ok) {
-				print("WELLFORMED");
+				println("WELLFORMED");
 			}
 			else {
-				print("MALFORMED");
+				println("MALFORMED");
 			}
-			println();
 		}
 	}
 }
