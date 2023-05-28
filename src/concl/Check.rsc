@@ -70,7 +70,7 @@ private bool checkConsoleComponent(ConsolePack ast) {
 	for(component(Game _) <- ast.components) {
 		game_component_count += 1;
 	}
-	return game_component_count == 1;
+	return game_component_count <= 1;
  }
  
  private bool checkControllerGameCombo(ConsolePack ast) {

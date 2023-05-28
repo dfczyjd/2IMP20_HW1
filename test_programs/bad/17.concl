@@ -7,6 +7,14 @@ console_pack my_console_pack {
 			resolution: Full-HD
 		}
 	},
+	console {
+		storage: 32 GB,
+		display {
+			diagonal: 17 inch,
+			type: OLED,
+			resolution: 5K
+		}
+	},
 	controller {
 		colour: blue
 	},
@@ -15,8 +23,5 @@ console_pack my_console_pack {
 	},
 	game {
 		name: Hedwig the Hedgehog
-	},
-	game {
-		name: Link's Resolution
 	}
 }

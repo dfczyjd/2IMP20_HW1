@@ -14,9 +14,5 @@ console_pack my_console_pack {
 		colour: black
 	},
 	game {
-		name: Hedwig the Hedgehog
-	},
-	game {
-		name: Link's Resolution
 	}
 }

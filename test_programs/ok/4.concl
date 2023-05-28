@@ -12,7 +12,5 @@ console_pack my_console_pack {
 	},
 	controller {
 		colour: black
-	},
-	game {
 	}
 }

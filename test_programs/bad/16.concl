@@ -5,6 +5,11 @@ console_pack my_console_pack {
 			diagonal: 30 inch,
 			type: LED,
 			resolution: Full-HD
+		},
+		display {
+			diagonal: 24 inch,
+			type: OLED,
+			resolution: 4K
 		}
 	},
 	controller {
@@ -15,8 +20,5 @@ console_pack my_console_pack {
 	},
 	game {
 		name: Hedwig the Hedgehog
-	},
-	game {
-		name: Link's Resolution
 	}
 }
