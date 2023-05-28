@@ -1,6 +1,8 @@
 module concl::Check
 
 import concl::AST;
+import List;
+import Set;
 
 /*
  * -Implement a well-formedness checker for the ConCL language. For this you must use the AST. 
@@ -19,10 +21,9 @@ import concl::AST;
  		checkConsoleComponent(ast) &&
  		checkGameComponent(ast) &&
  		checkControllerCount(ast) &&
- 		checkDuplicateControllers(ast) &&
+ 		checkDuplicateComponents(ast) &&
  		checkControllerGameCombo(ast) &&
  		checkDisplayType(ast) &&
- 		checkDuplicateComponents(ast) &&
  		checkStorageSize(ast);
  }
  
@@ -48,18 +49,11 @@ private bool checkConsoleComponent(ConsolePack ast) {
  	return (controller_count >= 1 && controller_count <= 4);
  }
  
- private bool checkDuplicateControllers(ConsolePack ast) {
-	/*
-	* Check if the console pack contains duplicate controllers
-	*/
- 	controllers = [];
- 	for(component(Controller c) <- ast.components) {
- 		if(c in controllers) {
- 			return false;
- 		} 
- 		controllers = controllers + c;
- 	}
- 	return true;
+ private bool checkDuplicateComponents(ConsolePack ast) {
+ 	/*
+ 	* Check if the console pack contains duplicate components
+ 	*/
+ 	return size(toSet(ast.components)) == size(ast.components); 
  }
  
  private bool checkGameComponent(ConsolePack ast) {
@@ -101,11 +95,6 @@ private bool checkConsoleComponent(ConsolePack ast) {
  }
  
  private bool checkDisplayType(ConsolePack ast) {
-	// already taken care of in the concrete syntax definition
-	return true;
- }
- 
- private bool checkDuplicateComponents(ConsolePack ast) {
 	// already taken care of in the concrete syntax definition
 	return true;
  }

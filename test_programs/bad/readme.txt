@@ -14,4 +14,3 @@
 14: two same coloured controllers
 15: game component with no name
 16: single console with double display
-17: two console components

@@ -4,3 +4,4 @@
 4: no game (no game component)
 5: display with a diagonal of 0 inch. this is not illegal according to the specifications
 6: 10.00000001 inch display
+7: two console components (makes no sense. but it is legal)
